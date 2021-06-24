@@ -1,6 +1,6 @@
 # DFS 문제의 경우 깊이의 제한의 default로 파이선은 1000이므로 많은 data의 경우 값이 안나올 수 있다.
 import sys
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(10**8)
 
 def dfs(x, y):
         if x < 0 or x >= h or y < 0 or y >= w:
