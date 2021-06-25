@@ -10,45 +10,44 @@ for i in range(N):
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 answer = 0
-change = True
+q = deque()
 
 def bfs(x, y):
-    q = deque()
-    union = []
-    visited = []
+    global check
     q.append((x, y))
-    union.append((x, y))
-    visited.append((x, y))
-    total, p = graph[x][y], 1
+    visited[x][y] = True
+    s = graph[x][y]
+    union = [(x, y)]
     while q:
         x, y = q.popleft()
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if 0 <= nx < N and 0 <= ny < N and (nx, ny) not in visited:
+            if 0 <= nx < N and 0 <= ny < N and visited[nx][ny] == False:
                 if L <= abs(graph[nx][ny] - graph[x][y]) <= R:
-                    total += graph[nx][ny]
-                    p += 1
-                    union.append((nx, ny))
-                    visited.append((nx, ny))
+                    check = True
+                    visited[nx][ny] = True
                     q.append((nx, ny))
+                    union.append((nx, ny))
+                    s += graph[nx][ny]
+    for a, b in union:
+        graph[a][b] = s // len(union)
                 
-    if p != 1:
-            global answer
-            global change
-            answer += 1
-            change = True
-    else:
-        global change
-        change = False
-    for a in union:
-        graph[a[0]][a[1]] = total // p
-
-while change == True:
+while True:
+    visited = [[False] * N for _ in range(N)]
+    check = False
     for i in range(N):
         for j in range(N):
-            bfs(i, j)
+            if visited[i][j] == False:
+                bfs(i, j)
+    if check:
+        answer += 1
+    else:
+        break
 
-print(graph)
 print(answer)
+
+
+
+# https://javaiyagi.tistory.com/614 참고
