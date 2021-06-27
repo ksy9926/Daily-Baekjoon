@@ -51,3 +51,4 @@ print(answer)
 
 
 # https://javaiyagi.tistory.com/614 참고
+# Pypy3 로 제출했을때만 정답이라고 뜸
