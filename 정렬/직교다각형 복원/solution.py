@@ -6,8 +6,7 @@ answer = 0
 for _ in range(N):
     points.append(list(map(int, input().split())))
 
-points.sort(key=lambda x: x[1])
-points.sort(key=lambda x: x[0])
+points.sort(key=lambda x: (x[0], x[1]))
 
 # 세로 길이 모두 더하기
 for i in range(0, N, 2):
